@@ -11,4 +11,6 @@ class Book(Base):
     price = Column(Float, nullable=False)
     stock = Column(Integer, default=0)
 
-    author = relationship("Author")
+    author = relationship("Author", back_populates="books")
+    orders = relationship("Order", back_populates="book")
+    preorders = relationship("PreOrder", back_populates="book")

@@ -7,3 +7,4 @@ from .preorder import PreOrder
 from .subscription import Subscription
 from .event import Event
 from .returnbook import ReturnBook
+from .event_registration import EventRegistration

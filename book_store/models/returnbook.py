@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
@@ -14,5 +14,5 @@ class ReturnBook(Base):
     return_date = Column(DateTime, default=datetime.utcnow)
     reason = Column(String)
 
-    order = relationship("Order", back_populates="book")
+    order = relationship("Order", back_populates="returns")
     book = relationship("Book")

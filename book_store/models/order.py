@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
@@ -12,9 +12,9 @@ class Order(Base):
     book_id = Column(Integer, ForeignKey("book.id"))
     quantity = Column(Integer)
     order_date = Column(DateTime, default=datetime.utcnow)
-    status = Column(String)  # нове, обробляється, виконано
+    status = Column(String)
     total_price = Column(Float)
 
-    customer = relationship("Customer", back_populates="order")
-    book = relationship("Book", back_populates="order")
+    customer = relationship("Customer", back_populates="orders")
+    book = relationship("Book", back_populates="orders")
     returns = relationship("ReturnBook", back_populates="order")

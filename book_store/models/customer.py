@@ -16,3 +16,4 @@ class Customer(Base):
     preorders = relationship("PreOrder", back_populates="customer")
     subscriptions = relationship("Subscription", back_populates="customer")
     event_registrations = relationship("EventRegistration", back_populates="customer")
+    registrations = relationship("EventRegistration", back_populates="customer")
