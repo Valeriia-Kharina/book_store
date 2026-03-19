@@ -8,7 +8,7 @@ class ReturnBook(Base):
     __tablename__ = "returnbook"
 
     id = Column(Integer, primary_key=True)
-    order_id = Column(Integer, ForeignKey("order.id"))
+    order_id = Column(Integer, ForeignKey("orders.id"))
     book_id = Column(Integer, ForeignKey("book.id"))
     quantity = Column(Integer)
     return_date = Column(DateTime, default=datetime.utcnow)

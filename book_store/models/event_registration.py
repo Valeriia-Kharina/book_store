@@ -11,4 +11,4 @@ class EventRegistration(Base):
     registration_date = Column(DateTime)
 
     event = relationship("Event", back_populates="registrations")
-    customer = relationship("Customer", back_populates="registrations")
+    customer = relationship("Customer", back_populates="event_registrations")

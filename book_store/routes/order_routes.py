@@ -15,7 +15,10 @@ def get_db():
 
 @router.post("/", response_model=OrderResponse)
 def create_order(order: OrderCreate, db: Session = Depends(get_db)):
-    return order_service.create_order(db, order)
+    try:
+        return order_service.create_order(db, order)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.get("/", response_model=list[OrderResponse])
 def get_orders(db: Session = Depends(get_db)):
@@ -34,3 +37,11 @@ def delete_order(order_id: int, db: Session = Depends(get_db)):
     if not deleted:
         raise HTTPException(status_code=404, detail="Order not found")
     return {"message": "Order deleted"}
+
+@router.patch("/{order_id}/status")
+def update_status(order_id: int, status: str, db: Session = Depends(get_db)):
+    """Метод для зміни статусу (наприклад, Cancelled для звільнення резерву)"""
+    updated = order_service.update_order_status(db, order_id, status)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return updated
